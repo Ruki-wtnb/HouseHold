@@ -1,0 +1,132 @@
+
+1
+[
+  {
+    "name": "食費"
+  },
+  {
+    "name": "外食費"
+  },
+  {
+    "name": "生活用品"
+  },
+  {
+    "name": "生活家電"
+  },
+  {
+    "name": "生活家具"
+  }
+]
+
+2
+[
+  {
+    "name": "QR"
+  },
+  {
+    "name": "カード"
+  },
+  {
+    "name": "現金"
+  }
+]
+
+3
+[
+  {
+    "name": "家賃"
+  },
+  {
+    "name": "水道代"
+  },
+  {
+    "name": "電気代"
+  },
+    {
+    "name": "ガス代"
+  },
+  {
+    "name": "Wifi代"
+  }
+]
+
+
+[
+  {
+    "date": "2022-04-10",
+    "name": "サイゼ",
+    "price": 1950,
+    "spending_id": 2,
+    "payment_id": 2
+  },
+  {
+    "date": "2022-04-10",
+    "name": "ドンキ・生活用品",
+    "price": 671,
+    "spending_id": 3,
+    "payment_id": 2
+  },
+  {
+    "date": "2022-04-16",
+    "name": "Z Burger&CBT",
+    "price": 2990,
+    "spending_id": 2,
+    "payment_id": 1
+  },
+  {
+    "date": "2022-04-12",
+    "name": "ケトル",
+    "price": 5000,
+    "spending_id": 4,
+    "payment_id": 2
+  },
+  {
+    "date": "2022-04-11",
+    "name": "トマト缶",
+    "price": 98,
+    "spending_id": 1,
+    "payment_id": 1
+  },
+  {
+    "date": "2022-04-11",
+    "name": "エビフライ",
+    "price": 420,
+    "spending_id": 1,
+    "payment_id": 1
+  },
+  {
+    "date": "2022-04-11",
+    "name": "トマト缶",
+    "price": 90,
+    "spending_id": 1,
+    "payment_id": 1
+  },
+  {
+    "date": "2022-04-11",
+    "name": "ブックエンド",
+    "price": 110,
+    "spending_id": 3,
+    "payment_id": 1
+  },
+  {
+    "date": "2022-04-14",
+    "name": "乳酸菌炭酸",
+    "price": 108,
+    "spending_id": 1,
+    "payment_id": 1
+  },
+  {
+    "date": "2022-04-15",
+    "name": "味噌ラーメン",
+    "price": 193,
+    "spending_id": 1,
+    "payment_id": 1
+  },
+  {
+    "date": "2022-04-17",
+    "name": "Gokuatsu",
+    "price": 1518,
+    "spending_id": 3,
+    "payment_id": 1
+  }
+]

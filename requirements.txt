@@ -1,0 +1,12 @@
+aiomysql
+bcrypt
+fastapi
+httptools
+mysqlclient
+passlib
+pydantic
+python-jose
+python-multipart
+SQLAlchemy
+sqlalchemy-migrate
+uvicorn

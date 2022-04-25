@@ -1,0 +1,25 @@
+version: "3.0"
+
+services:
+  api_hh:
+    container_name: "household"
+    build: .
+    image: fastapi
+    tty: true
+    ports:
+      - 8080:8080
+  db_hh:
+      image: mysql:8.0
+      container_name: "householddb"
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        MYSQL_DATABASE: 'HouseHold'
+        TZ: 'Asia/Tokyo'
+      ports:
+        - '3306:3306'
+      volumes:
+        - ./db/mysql/volumes:/var/lib/mysql
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+volumes:
+  mysql_data:
