@@ -2,6 +2,8 @@
 from fastapi import APIRouter
 from fastapi import Depends
 
+from typing import List
+
 from sqlalchemy import select
 
 from sqlalchemy.engine import Result
@@ -68,3 +70,16 @@ async def put_fixed(year_month:str, fixed_id: str, price: int, db:AsyncSession=D
     update_fixed_costs.price = price
 
     return com.execute_commit(update_fixed_costs, db)
+
+
+@router.post('/bulk')
+async def create_fixed(accounts:List[sc_FixedCosts], db:AsyncSession=Depends(get_db)):
+
+    count = 0
+
+    for account in accounts:
+        new_fix = md_FixedCosts(**account.dict())
+        await com.execute_commit(new_fix, db)
+        count += 1
+    
+    return {'Message': f'{count} spendings data registerd'}

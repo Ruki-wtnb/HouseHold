@@ -2,6 +2,8 @@
 from fastapi import APIRouter
 from fastapi import Depends
 
+from sqlalchemy import select
+
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -34,7 +36,7 @@ async def create_income(account:sc_Account, db:AsyncSession=Depends(get_db)):
 async def get_income(db:AsyncSession=Depends(get_db)):
 
     result: Result = await db.execute(
-        md_Incomes
+        select(md_Incomes)
     )
 
     return result.all()

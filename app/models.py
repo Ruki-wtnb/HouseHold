@@ -1,5 +1,6 @@
 
-from sqlalchemy import Column, ForeignKey, Integer, String
+from email.policy import default
+from sqlalchemy import Column, ColumnDefault, ForeignKey, Integer, String
 from sqlalchemy.types import Date
 from .database import Base
 

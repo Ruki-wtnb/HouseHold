@@ -130,3 +130,32 @@
     "payment_id": 1
   }
 ]
+
+
+[
+  {
+    "year_month": "2022-04",
+    "price": 121800,
+    "fixed_id": 1
+  },
+    {
+    "year_month": "2022-04",
+    "price": 4532,
+    "fixed_id": 2
+  },
+    {
+    "year_month": "2022-04",
+    "price": 7510,
+    "fixed_id": 3
+  },
+  {
+    "year_month": "2022-04",
+    "price": 3459,
+    "fixed_id": 4
+  },
+   {
+    "year_month": "2022-04",
+    "price": 4733,
+    "fixed_id": 5
+  }
+]
