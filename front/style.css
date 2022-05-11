@@ -1,0 +1,81 @@
+body{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.main{
+    display: flex;
+}
+
+header {
+    display: flex;
+    max-width: 100%;
+    height: 100px;
+    background-color: #1e78be;
+    align-items: center;
+  }
+
+.title {
+    color: white;
+}
+
+.sub-title {
+    color: #1e78be;
+    text-align: center;
+}
+
+.panel {
+    border:1px solid #EEE;
+    box-shadow:rgba(122, 122, 122, 0.0588235) 0px 0px 6px 3px;
+    -webkit-box-shadow:rgba(122, 122, 122, 0.0588235) 0px 0px 6px 3px;
+    -moz-box-shadow:rgba(122, 122, 122, 0.0588235) 0px 0px 6px 3px;
+}
+
+.list,.graph {
+    width: 50%;
+    height: 100%;
+}
+
+.list{
+   margin-left: 10em;
+   display: inline;
+}
+
+table{
+    list-style: none;
+    padding-left: 0;
+    display: inline-block;
+}
+
+.material-icons.md-36 { font-size: 36px; }
+
+table{
+    color: white;
+    border-spacing: 0 1px;
+}
+
+.income{
+    background-color: #3974D4;
+}
+
+.balance {
+    background-color: #2BA825;
+}
+
+.spending {
+    background-color: #D44E99;
+}
+
+.total-border{
+    border-bottom: 5px solid white;
+}
+
+th{
+    padding-left: 0.5em;
+}
+
+.value{
+    font-size: 24px;
+    padding-left: 1em;
+    padding-right: 0.5em;
+    text-align: right;
+}

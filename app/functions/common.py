@@ -6,8 +6,6 @@ from sqlalchemy import select
 
 from sqlalchemy.engine import Result
 
-from app.models import Account
-
 
 async def execute_commit(model, db):
 
