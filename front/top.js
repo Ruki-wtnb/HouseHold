@@ -4,15 +4,11 @@ fetch('http://localhost:8000/totals/list/2022-05', {
 })
 .then(response => response.json())
 .then(res => {
-    console.log(res);
-
     let table = document.getElementById("list-table")
 
-    console.log(table.columns)
-
+    console.log(Object.keys(res))
     for(let row of table.rows) {
-        console.log(row.cells[1].id)
-        console.log(row.cells[2].innerText)
+        row.cells[2].innerText = res[row.cells[1].id]
     }
 
 })
