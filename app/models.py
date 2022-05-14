@@ -28,7 +28,7 @@ class FixedCostCategory(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(50), nullable=False)
     en_name = Column(String(50), nullable=False)
-    fixed_costs = relationship("FixedCost")
+    fixed_costs = relationship("FixedCost", lazy='selectin')
 
 class VariableCostCategory(Base):
     __tablename__ = 'variable_cost_categories'
@@ -36,7 +36,7 @@ class VariableCostCategory(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(50), nullable=False)
     en_name = Column(String(50), nullable=False)
-    variable_costs = relationship("VariableCost")
+    variable_costs = relationship("VariableCost", lazy='selectin')
 
 
 class FixedCost(Base):
@@ -45,7 +45,7 @@ class FixedCost(Base):
     year_month = Column(String(10), primary_key=True)
     price = Column(Integer, nullable=False)
     fixed_category_id = Column(Integer, ForeignKey('fixed_cost_categories.id'), primary_key=True)
-    fixed_cost_category = relationship("FixedCostCategory", back_populates="fixedCosts", lazy="joined", innerjoin=True)
+    fixed_cost_category = relationship("FixedCostCategory", back_populates="fixedCosts", lazy='selectin', innerjoin=True)
 
 
 class VariableCost(Base):
@@ -57,7 +57,7 @@ class VariableCost(Base):
     price = Column(Integer, nullable=False)
     spending_flag = Column(Boolean, nullable=False)
     variable_category_id = Column(Integer, ForeignKey('variable_cost_categories.id'), nullable=False)
-    variable_category = relationship("VariableCostCategory",  back_populates="variableCosts", lazy="joined", innerjoin=True)
+    variable_category = relationship("VariableCostCategory",  back_populates="variableCosts", lazy='selectin', innerjoin=True)
 
 
 class Totals(Base):
