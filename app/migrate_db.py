@@ -8,8 +8,7 @@ from sqlalchemy import create_engine
 
 from .models import Base
 
-DB_URL = 'sqlite:///./household.db'
-#"mysql+pymysql://root@db_hh:3306/householddb?charset=utf8"
+DB_URL = "mysql+pymysql://root@db_hh:3306/householddb?charset=utf8"
 
 engine = create_engine(DB_URL, echo=True)
 
