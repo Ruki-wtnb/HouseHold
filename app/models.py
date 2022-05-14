@@ -1,8 +1,8 @@
 
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.schema import ForeignKey
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Boolean, Date
+from websockets import lazy_import
 from .database import Base
 
 from sqlalchemy.ext.declarative import AbstractConcreteBase
@@ -16,12 +16,12 @@ class Category(AbstractConcreteBase, Base):
 class FixedCostCategory(Category):
     __tablename__ = 'fixed_cost_categories'
     __table_args__ = {'extend_existing': True}
-    
+    fixed_costs = relationship("FixedCost")
 
 class VariableCostCategory(Category):
     __tablename__ = 'variable_cost_categories'
     __table_args__ = {'extend_existing': True}
-    
+    fixed_costs = relationship("VariableCost")
 
 
 class FixedCost(Base):
@@ -30,7 +30,8 @@ class FixedCost(Base):
     year_month = Column(String(10), primary_key=True)
     price = Column(Integer, nullable=False)
     fixed_category_id = Column(Integer, ForeignKey('fixed_cost_categories.id'), primary_key=True)
-    fixed_cost_category = relationship("FixedCostCategory", lazy="joined", innerjoin=True)
+    fixed_cost_category = relationship("FixedCostCategory", back_populates="fixedCosts", lazy="joined", innerjoin=True)
+
 
 class VariableCost(Base):
     __tablename__ = 'variable_costs'
@@ -41,7 +42,7 @@ class VariableCost(Base):
     price = Column(Integer, nullable=False)
     spending_flag = Column(Boolean, nullable=False)
     variable_category_id = Column(Integer, ForeignKey('variable_cost_categories.id'), nullable=False)
-    variable_category = relationship("VariableCostCategory", lazy="joined", innerjoin=True)
+    variable_category = relationship("VariableCostCategory",  back_populates="variableCosts", lazy="joined", innerjoin=True)
 
 
 class Totals(Base):
