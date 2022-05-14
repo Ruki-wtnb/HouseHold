@@ -36,7 +36,7 @@ class VariableCostCategory(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(50), nullable=False)
     en_name = Column(String(50), nullable=False)
-    fixed_costs = relationship("VariableCost")
+    variable_costs = relationship("VariableCost")
 
 
 class FixedCost(Base):
