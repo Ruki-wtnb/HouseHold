@@ -1,5 +1,6 @@
 
 from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 from sqlalchemy.types import Boolean, Date
 from .database import Base
 
@@ -26,6 +27,7 @@ class FixedCosts(Base):
     year_month = Column(String(10), primary_key=True)
     price = Column(Integer, nullable=False)
     fixed_category_id = Column(Integer, ForeignKey('fixed_costs_categories.id'), primary_key=True)
+    fixed_category: FixedCostsCategories = relationship("FixedCostsCategories", back_populates="fixedCosts", lazy="joined")
 
 class VariableCosts(Base):
     __tablename__ = 'variable_costs'
@@ -34,8 +36,9 @@ class VariableCosts(Base):
     date = Column(Date, nullable=False)
     name = Column(String(100), nullable=False)
     price = Column(Integer, nullable=False)
-    variable_category_id = Column(Integer, ForeignKey('variable_costs_categories.id'), nullable=False)
     spending_flag = Column(Boolean, nullable=False)
+    variable_category_id = Column(Integer, ForeignKey('variable_costs_categories.id'), nullable=False)
+    variable_category: VariableCostsCategories = relationship("VariableCostsCategories", back_populates="variableCosts", lazy="joined")
 
 
 class Totals(Base):
