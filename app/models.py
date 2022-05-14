@@ -7,29 +7,31 @@ from .database import Base
 from sqlalchemy.ext.declarative import AbstractConcreteBase
 
 
-class Categories(AbstractConcreteBase, Base):
+class Category(AbstractConcreteBase, Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(50), nullable=False)
     en_name = Column(String(50), nullable=False)
 
-class FixedCostsCategories(Categories):
-    __tablename__ = 'fixed_costs_categories'
+class FixedCostCategory(Category):
+    __tablename__ = 'fixed_cost_categories'
     __table_args__ = {'extend_existing': True}
+    fixed_cost = relationship("FixedCost", back_populates="fixedCost", lazy="joined")
 
-class VariableCostsCategories(Categories):
-    __tablename__ = 'variable_costs_categories'
+class VariableCostCategory(Category):
+    __tablename__ = 'variable_cost_categories'
     __table_args__ = {'extend_existing': True}
+    variable_cost = relationship("VariableCost", back_populates="variableCost", lazy="joined")
 
 
-class FixedCosts(Base):
+class FixedCost(Base):
     __tablename__ = 'fixed_costs'
     __table_args__ = {'extend_existing': True}
     year_month = Column(String(10), primary_key=True)
     price = Column(Integer, nullable=False)
-    fixed_category_id = Column(Integer, ForeignKey('fixed_costs_categories.id'), primary_key=True)
-    fixed_category: FixedCostsCategories = relationship("FixedCostsCategories", back_populates="fixedCosts", lazy="joined")
+    fixed_category_id = Column(Integer, ForeignKey('fixed_cost_categories.id'), primary_key=True)
+    fixed_cost_category: FixedCostCategory = relationship("FixedCostCategory", back_populates="fixedCost", lazy="joined")
 
-class VariableCosts(Base):
+class VariableCost(Base):
     __tablename__ = 'variable_costs'
     __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
@@ -37,8 +39,8 @@ class VariableCosts(Base):
     name = Column(String(100), nullable=False)
     price = Column(Integer, nullable=False)
     spending_flag = Column(Boolean, nullable=False)
-    variable_category_id = Column(Integer, ForeignKey('variable_costs_categories.id'), nullable=False)
-    variable_category: VariableCostsCategories = relationship("VariableCostsCategories", back_populates="variableCosts", lazy="joined")
+    variable_category_id = Column(Integer, ForeignKey('variable_cost_categories.id'), nullable=False)
+    variable_category: VariableCostCategory = relationship("VariableCostCategory", back_populates="variableCost", lazy="joined")
 
 
 class Totals(Base):
