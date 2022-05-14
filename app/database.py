@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 
-ASYNC_DB_URL = 'mysql://bf66734e389b69:559f48c7@us-cdbr-east-05.cleardb.net/heroku_ab32341ec7387b1?reconnect=true'
+ASYNC_DB_URL = 'sqlite:///./household.db'
 #"mysql+aiomysql://root@db_hh:3306/householddb?charset=utf8"
 
 async_engine  = create_async_engine(ASYNC_DB_URL, echo=True)
