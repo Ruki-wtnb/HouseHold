@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 
-ASYNC_DB_URL = "postgresql://root@db_hh:3306/householddb?charset=utf8"
+ASYNC_DB_URL = "postgres://togjxwubllzqzv:969d165b0f23231b52209e0372d73db8a36c50971f1366deaf2beffa33ab1c40@ec2-44-196-223-128.compute-1.amazonaws.com:5432/d2aslj2v9r3hhn"
 #"mysql+aiomysql://root@db_hh:3306/householddb?charset=utf8"
 
 async_engine  = create_async_engine(ASYNC_DB_URL, echo=True)

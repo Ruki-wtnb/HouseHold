@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 
 from .models import Base
 
-DB_URL = "postgresql://root@db_hh:3306/householddb?charset=utf8"
+DB_URL = "postgres://togjxwubllzqzv:969d165b0f23231b52209e0372d73db8a36c50971f1366deaf2beffa33ab1c40@ec2-44-196-223-128.compute-1.amazonaws.com:5432/d2aslj2v9r3hhn"
 #"mysql+pymysql://root@db_hh:3306/householddb?charset=utf8"
 
 engine = create_engine(DB_URL, echo=True)
