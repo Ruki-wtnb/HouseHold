@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 
-ASYNC_DB_URL = 'mysql+pymysql://{user}:{password}@{host}/{db}?charset=utf8'.format(**{
+ASYNC_DB_URL = 'mysql+aiomysql://{user}:{password}@{host}/{db}?charset=utf8'.format(**{
     'user': os.getenv('DB_USER', os.environ['DB_USERNAME']),
     'password': os.getenv('DB_PASSWORD', os.environ['DB_PASSWORD']),
     'host': os.getenv('DB_HOST', os.environ['DB_HOSTNAME']),

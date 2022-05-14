@@ -4,6 +4,7 @@ DBマイグレーション用ファイル
 # 初期化 python -c "import app.migrate_db; app.migrate_db.reset_database()"
 #　作成　　python -m app.migrate_db
 
+# >>> heroku run python
 # >>> from app.migrate_db import create_database
 # >>> create_database()
 
@@ -11,7 +12,7 @@ import os
 from sqlalchemy import create_engine
 from .models import Base
 
-DB_URL = 'mysql+pymysql://{user}:{password}@{host}/{db}?charset=utf8'.format(**{
+DB_URL = 'mysql+aiomysql://{user}:{password}@{host}/{db}?charset=utf8'.format(**{
     'user': os.getenv('DB_USER', os.environ['DB_USERNAME']),
     'password': os.getenv('DB_PASSWORD', os.environ['DB_PASSWORD']),
     'host': os.getenv('DB_HOST', os.environ['DB_HOSTNAME']),
