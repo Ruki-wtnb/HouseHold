@@ -2,7 +2,6 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Boolean, Date
-from websockets import lazy_import
 from .database import Base
 
 from sqlalchemy.ext.declarative import AbstractConcreteBase
