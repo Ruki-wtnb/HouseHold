@@ -29,7 +29,7 @@ def reset_database():
     Base.metadata.create_all(bind=engine)
 
 def create_database():
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine, lazy='joined')
 
 def drop_table():
     Base.metadata.drop_all(bind=engine)
