@@ -7,17 +7,17 @@ class Categories(BaseModel):
     name: str
     en_name: str
 
-class FixedCosts(BaseModel):
+class FixedCost(BaseModel):
     year_month: str
     price: int
     fixed_category_id: int
 
-class VariableCosts(BaseModel):
+class VariableCost(BaseModel):
     date: date
     name: str
     price: int
 
-class VariableCostsValk(VariableCosts):
+class VariableCostsValk(VariableCost):
     variable_category_id: int
 
 class Totals(BaseModel):

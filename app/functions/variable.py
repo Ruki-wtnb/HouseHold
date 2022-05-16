@@ -6,15 +6,14 @@ from sqlalchemy import select
 
 from sqlalchemy.engine import Result
 
-from ..models import VariableCosts as md_Variable
+from ..models import VariableCost as md_Variable
 
-from ..schemas import VariableCosts as sc_Variable
+from ..schemas import VariableCost as sc_Variable
 
 from ..categories import VariableName
 
 async def get_variable_by_id(id, db):
-    result: Result = await db.execute(
-        select(md_Variable).filter(md_Variable.id == id))
+    result: Result = db.query(md_Variable).filter(md_Variable.id == id)
     
     variable: md_Variable = result.first()[0]
     if not variable:

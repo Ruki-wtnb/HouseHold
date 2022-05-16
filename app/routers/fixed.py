@@ -6,10 +6,12 @@ from typing import List
 
 from sqlalchemy import select
 
-from sqlalchemy.engine import Result
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 
-from app.functions.fixed import get_fixed_id
+from sqlalchemy.engine import Result
+
+
+from app.functions.fixed import set_fixed_id
 
 from ..categories import FixedName
 
@@ -18,9 +20,9 @@ from ..database import get_db
 from ..functions import common as com
 from ..functions import fixed
 
-from ..models import FixedCosts as mo_Fixed
+from ..models import FixedCost as mo_Fixed
 
-from ..schemas import FixedCosts as sc_Fixed
+from ..schemas import FixedCost as sc_Fixed
 
 
 router = APIRouter(
@@ -30,50 +32,52 @@ router = APIRouter(
 
 
 @router.post('')
-async def create_fixed(account:sc_Fixed, fixed_name: FixedName, db:AsyncSession=Depends(get_db)):
+async def create_fixed(account:sc_Fixed, fixed_name: FixedName, db:Session=Depends(get_db)):
 
-    fixed_id = fixed.get_fixed_id(fixed_name)
     new_fix = mo_Fixed(**account.dict())
-    new_fix.fixed_id = fixed_id
+    new_fix = fixed.set_fixed_id(new_fix, fixed_name)
 
-    return await com.execute_commit(new_fix, db)
+    return com.execute_commit(new_fix, db)
 
 
 @router.get('')
-async def get_fixed(year_month: str, db:AsyncSession=Depends(get_db)):
+async def get_fixed(year_month: str, db:Session=Depends(get_db)):
 
-    result: Result = await db.execute(
-        select(mo_Fixed).filter(
+    result = db.query(
+        mo_Fixed
+        ).filter(
             mo_Fixed.year_month == year_month
-        )
-    )
+            ).all()
 
-    return result.all()
+    return result
 
-@router.put('')
-async def put_fixed(year_month:str, fixed_id: str, price: int, db:AsyncSession=Depends(get_db)):
+# @router.put('')
+# async def put_fixed(year_month:str, fixed_id: str, price: int, db:Session=Depends(get_db)):
 
-    update_fixed_costs = await db.execute(
-        select(
-            mo_Fixed
-            ).filter(
-                mo_Fixed.year_month == year_month,
-                mo_Fixed.fixed_id == fixed_id
-            )
-        )
-    update_fixed_costs.price = price
+#     update_fixed_costs = await db.execute(
+#         select(
+#             mo_Fixed
+#             ).filter(
+#                 mo_Fixed.year_month == year_month,
+#                 mo_Fixed.fixed_id == fixed_id
+#             )
+#         )
+#     update_fixed_costs.price = price
 
-    return com.execute_commit(update_fixed_costs, db)
+#     return com.execute_commit(update_fixed_costs, db)
 
 
 @router.post('/bulk')
-async def create_fixed(accounts:List[sc_Fixed], db:AsyncSession=Depends(get_db)):
+async def create_fixed(accounts:List[sc_Fixed], db:Session=Depends(get_db)):
 
     count = 0
 
     for account in accounts:
         new_fix = mo_Fixed(**account.dict())
-        await com.execute_commit(new_fix, db)
+        db.add(new_fix)
+        db.commit()
+        db.refresh(new_fix)
+        # com.execute_commit(new_fix, db)
         count += 1
     
     return {'Message': f'{count} spendings data registerd'}
