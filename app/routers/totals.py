@@ -26,7 +26,6 @@ router = APIRouter(
 
 @router.get('/list/{year_month}', status_code=status.HTTP_200_OK)
 def get_totals(year_month: str, response: Response, db:AsyncSession=Depends(get_db)):
-    # response.headers["Access-Control-Allow-Origin"] = 'http://127.0.0.1:5500'
 
     year_month_list = year_month.split('-')
 
