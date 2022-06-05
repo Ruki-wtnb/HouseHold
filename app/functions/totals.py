@@ -14,7 +14,7 @@ def get_fixed_result(year_month, db: Session):
     
     fixed_result = db.query(
         FixedCostCategory.en_name,
-        func.sum(FixedCost.price)
+        FixedCost.price
         ).join(
             FixedCostCategory, 
             FixedCost.fixed_category_id == FixedCostCategory.id
