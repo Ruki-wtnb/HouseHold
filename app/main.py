@@ -28,6 +28,8 @@ origins = [
     'http://127.0.0.1:5500',
     'http://127.0.0.1:5501',
     'https://ruki-wtnb.github.io',
+    'https://ruki-wtnb.github.io/household-front/top.html',
+    'https://ruki-wtnb.github.io/household-front/input.html'
 ]
 
 app.add_middleware(
