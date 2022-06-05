@@ -12,14 +12,13 @@ from ..schemas import VariableCost as sc_Variable
 
 from ..categories import VariableName
 
-async def get_variable_by_id(id, db):
-    result: Result = db.query(md_Variable).filter(md_Variable.id == id)
+def get_variable_by_id(id, db):
+    result = db.query(md_Variable).filter(md_Variable.id == id)
     
-    variable: md_Variable = result.first()[0]
-    if not variable:
+    if not result:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='variable not found')
     
-    return variable
+    return result
 
 
 def set_variable_id(new_variable: md_Variable, variable_name: VariableName):

@@ -1,18 +1,11 @@
-from datetime import date
 
 from fastapi import APIRouter
 from fastapi import Depends
-from fastapi import HTTPException
 from fastapi import status
 
-from sqlalchemy import extract
-from sqlalchemy import func
-from sqlalchemy import join
-from sqlalchemy import select
+from fastapi.responses import JSONResponse
 
 from sqlalchemy.orm import Session
-
-from sqlalchemy.engine import Result
 
 from typing import List
 
@@ -35,7 +28,7 @@ router = APIRouter(
 )
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
-def create_spending(account:sc_Variable, variable_name: VariableName, db:Session=Depends(get_db)):
+def create_variable(account:sc_Variable, variable_name: VariableName, db:Session=Depends(get_db)):
 
     new_variable = md_Variable(**account.dict())
     new_variable = va.set_variable_id(new_variable, variable_name)
@@ -48,7 +41,7 @@ def create_spending(account:sc_Variable, variable_name: VariableName, db:Session
 
 
 @router.get('/', status_code=status.HTTP_200_OK)
-def get_spending(db:Session=Depends(get_db)):
+def get_variable(db:Session=Depends(get_db)):
     result = db.query(md_Variable)
     return result.all()
 
@@ -77,15 +70,16 @@ def get_spending(db:Session=Depends(get_db)):
 #     return await com.execute_commit(new_existing_variable)
 
 
-# @router.delete('/{id}', status_code=status.HTTP_200_OK)
-#  def delete_spending(id: int, db:Session=Depends(get_db)):
+@router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
+def delete_variable(id: int, db:Session=Depends(get_db)):
     
-#     delete_spending = va.get_variable_by_id(id, db)
+    result = va.get_variable_by_id(id, db)
+    result.delete()
+    db.commit()
 
-#     await db.delete(delete_spending)
-#     await db.commit()
-
-#     return {'Message': 'Delete succeed'}
+    content = {'Message': 'Delete succeed'}
+    headers = {"X-Cat-Dog": "alone in the world", "Content-Language": "en-US"}
+    return JSONResponse(content=content, headers=headers)
 
 
 @router.post('/bulk', status_code=status.HTTP_200_OK)

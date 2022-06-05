@@ -10,7 +10,6 @@ class Categories(BaseModel):
 class FixedCost(BaseModel):
     year_month: str
     price: int
-    fixed_category_id: int
 
 class VariableCost(BaseModel):
     date: date

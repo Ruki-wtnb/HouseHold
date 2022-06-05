@@ -4,26 +4,14 @@ from fastapi import Depends
 
 from typing import List
 
-from sqlalchemy import select
-
 from sqlalchemy.orm import Session
 
-from sqlalchemy.engine import Result
-
-
-from app.functions.fixed import set_fixed_id
-
 from ..categories import FixedName
-
 from ..database import get_db
-
 from ..functions import common as com
-from ..functions import fixed
-
+from ..functions.fixed import set_fixed_id
 from ..models import FixedCost as mo_Fixed
-
 from ..schemas import FixedCost as sc_Fixed
-
 
 router = APIRouter(
     prefix='/fixed',
@@ -35,9 +23,9 @@ router = APIRouter(
 async def create_fixed(account:sc_Fixed, fixed_name: FixedName, db:Session=Depends(get_db)):
 
     new_fix = mo_Fixed(**account.dict())
-    new_fix = fixed.set_fixed_id(new_fix, fixed_name)
+    new_fix = set_fixed_id(new_fix, fixed_name)
 
-    return com.execute_commit(new_fix, db)
+    return await com.execute_commit(new_fix, db)
 
 
 @router.get('')
@@ -47,7 +35,7 @@ async def get_fixed(year_month: str, db:Session=Depends(get_db)):
         mo_Fixed
         ).filter(
             mo_Fixed.year_month == year_month
-            ).all()
+        ).all()
 
     return result
 
